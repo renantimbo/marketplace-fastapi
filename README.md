@@ -37,7 +37,32 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-4. Configure as variáveis de ambiente no arquivo `.env`
+4. Configure as variáveis de ambiente no arquivo `.env`:
+
+```env
+# App Configuration
+APP_NAME=Marketplace API
+APP_VERSION=1.0.0
+DEBUG=True
+
+# Database
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/marketplace
+
+# Redis
+REDIS_URL=redis://localhost:6379/0
+
+# Security
+SECRET_KEY=your-secret-key-change-this-in-production
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# CORS (JSON array format)
+CORS_ORIGINS=["*"]
+
+# Logging
+LOG_LEVEL=INFO
+LOG_FORMAT=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+```
 
 5. Execute as migrações:
 ```bash
@@ -67,6 +92,10 @@ Após iniciar a aplicação, acesse:
 - ReDoc: `http://localhost:8000/redoc`
 
 ## Endpoints
+
+### Health Check
+
+- `GET /health` - Verifica saúde da aplicação, banco de dados e Redis
 
 ### Usuários
 
