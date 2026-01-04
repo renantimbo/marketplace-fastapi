@@ -1,29 +1,24 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
+from app.modules.users.models import UserRole
 
 
 class UserBase(BaseModel):
+    name: str
     email: EmailStr
-    username: str
-    full_name: Optional[str] = None
+    role: Optional[UserRole] = UserRole.CUSTOMER
 
 
-class UserCreate(UserBase):
+class UserRegister(BaseModel):
+    name: str
+    email: EmailStr
     password: str
-
-
-class UserUpdate(BaseModel):
-    email: Optional[EmailStr] = None
-    username: Optional[str] = None
-    full_name: Optional[str] = None
-    is_active: Optional[bool] = None
+    role: Optional[UserRole] = UserRole.CUSTOMER
 
 
 class UserResponse(UserBase):
     id: int
-    is_active: bool
-    is_superuser: bool
     created_at: datetime
     updated_at: Optional[datetime] = None
     
@@ -32,13 +27,17 @@ class UserResponse(UserBase):
 
 
 class UserLogin(BaseModel):
-    username: str
+    email: EmailStr
     password: str
 
 
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+
+class TokenData(BaseModel):
+    user_id: Optional[int] = None
 
 
 
