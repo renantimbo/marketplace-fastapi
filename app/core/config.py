@@ -10,10 +10,10 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     
     # Database
-    DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/marketplace"
+    DATABASE_URL: str = "postgresql://postgres:postgres@db:5432/marketplace"
     
     # Redis
-    REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_URL: str = "redis://redis:6379/0"
     
     # Security
     SECRET_KEY: str = "change-this-secret-key-in-production"
