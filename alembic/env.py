@@ -2,20 +2,17 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
-from app.infra.db import Base
+from app.infrastructure.db import Base
 from app.core.config import settings
+import app.adapters.outbound.persistence.models  # noqa: F401 — registers ORM models with Base
 
-# this is the Alembic Config object
 config = context.config
 
-# Interpret the config file for Python logging.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Set the SQLAlchemy URL from settings
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
-# Import all models so Alembic can detect them
 target_metadata = Base.metadata
 
 
